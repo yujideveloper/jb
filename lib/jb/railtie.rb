@@ -14,19 +14,11 @@ module Jb
       end
     end
 
-    if Rails::VERSION::MAJOR >= 5
-      module ::ActionController
-        module ApiRendering
-          include ActionView::Rendering
-        end
-      end
+    ActiveSupport.on_load :action_controller_api do
+      include ActionView::Rendering
 
-      ActiveSupport.on_load :action_controller do
-        if name == 'ActionController::API'
-          include ActionController::Helpers
-          include ActionController::ImplicitRender
-        end
-      end
+      include ActionController::Helpers
+      include ActionController::ImplicitRender
     end
 
     generators do |app|

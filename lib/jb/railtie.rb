@@ -15,6 +15,8 @@ module Jb
     end
 
     if Rails::VERSION::MAJOR >= 5
+      require "action_view"
+
       module ::ActionController
         module ApiRendering
           include ActionView::Rendering
